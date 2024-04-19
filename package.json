@@ -1,0 +1,34 @@
+{
+  "name": "cloud-fun-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "functions-framework --target=helloTSHttp --signature-type=http",
+    "start:dev": "npm --node-options --inspect-brk run start",
+    "start:dev:ts": "npm --node-options --inspect-brk --require=ts-node/register run start",
+    "start:dev:watch": "npx nodemon --exec 'clear; npm run start' ./src/index.ts",
+    "prestart": "npm run build",
+    "gcloud:deploy": "gcloud",
+    "gcloud:local:run": "gcloud alpha functions local call hello-ts-http",
+    "gcloud:local:deploy": "gcloud alpha functions local deploy hello-ts-http --entry-point=./dist/index.js --runtime=nodejs20",
+    "build": "tsc",
+    "build:gcp": "npm run build",
+    "pack": "pack build hello-ts-http --builder gcr.io/buildpacks/builder:latest",
+    "lint": "eslint --ext .ts ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@stylistic/eslint-plugin": "^1.7.2",
+    "@stylistic/eslint-plugin-ts": "^1.7.2",
+    "eslint": "^8.57.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.7.0"
+  }
+}
